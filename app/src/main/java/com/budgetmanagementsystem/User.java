@@ -1,16 +1,9 @@
 package com.budgetmanagementsystem;
 
 public class User {
-    protected int userid;
-    protected String username;
-    protected String password_encrypted;
+    protected int UserID;
+    protected String Username;
+    protected String Password;
 
-    public User(int userid, String username, String password_encrypted)
-    {
-        this.userid = userid;
-        this.username = username;
-        this.password_encrypted = password_encrypted;
-    }
-
-
+    public User() {};
 }

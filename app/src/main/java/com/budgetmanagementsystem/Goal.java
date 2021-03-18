@@ -3,11 +3,11 @@ package com.budgetmanagementsystem;
 import java.util.Date;
 
 public class Goal {
-    protected int userid;
-    protected Date startDate;
-    protected Date endDate;
-    protected double startBal;
-    protected double endBal;
+    protected int UserID;
+    protected Date StartDate;
+    protected Date EndDate;
+    protected double StartBalance;
+    protected double EndBalance;
 
     public Goal() {}
 }

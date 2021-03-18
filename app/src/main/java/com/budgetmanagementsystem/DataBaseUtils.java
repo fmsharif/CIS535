@@ -146,7 +146,11 @@ public class DataBaseUtils extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(table, cols, select, selArgs, null, null, null);
         cursor.moveToFirst();
-        User user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        User user = new User();
+        int i = 0;
+        user.UserID = cursor.getInt(i++);
+        user.Username = cursor.getString(i++);
+        user.Password = cursor.getString(i++);
         cursor.close();
         db.close();
 
@@ -166,11 +170,11 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Goal goal = new Goal();
         int i = 0;
-        goal.userid = cursor.getInt(i++);
-        goal.startDate = Date.valueOf(cursor.getString(i++));
-        goal.startBal = cursor.getDouble(i++);
-        goal.endDate = Date.valueOf(cursor.getString(i++));
-        goal.endBal = cursor.getDouble(i++);
+        goal.UserID = cursor.getInt(i++);
+        goal.StartDate = Date.valueOf(cursor.getString(i++));
+        goal.StartBalance = cursor.getDouble(i++);
+        goal.EndDate = Date.valueOf(cursor.getString(i++));
+        goal.EndBalance = cursor.getDouble(i++);
         cursor.close();
         db.close();
 

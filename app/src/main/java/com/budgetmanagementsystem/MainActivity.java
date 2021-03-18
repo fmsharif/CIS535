@@ -24,6 +24,6 @@ public class MainActivity extends AppCompatActivity {
         goal = DataBaseUtils.GetGoalByID(this, 1);
         trans = DataBaseUtils.GetTransactionByID(this, 1);
 
-        txt1.setText(trans.TransactionName);
+        txt1.setText(user.Username);
     }
 }
