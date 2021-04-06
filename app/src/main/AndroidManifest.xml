@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddUser" />
+        <activity android:name=".AddGoal" />
+        <activity android:name=".AddTransaction" />
+        <activity android:name=".Menu" />
+        <activity android:name=".ViewHistory" />
     </application>
 
 </manifest>
