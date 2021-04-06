@@ -1,5 +1,6 @@
 package com.budgetmanagementsystem;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -135,6 +136,28 @@ public class DataBaseUtils extends SQLiteOpenHelper {
     }
     //endregion
 
+    public static User GetUserByLogin(Context context, String username, String password)
+    {
+        SQLiteDatabase db = getDB(context);
+
+        String table = "user";
+        String[] cols = {"userid", "username", "password"};
+        String select = "username=? AND password=?";
+        String[] selArgs = {username, password};
+
+        Cursor cursor = db.query(table, cols, select, selArgs, null, null, null);
+        cursor.moveToFirst();
+        User user = new User();
+        int i = 0;
+        user.UserID = cursor.getInt(i++);
+        user.Username = cursor.getString(i++);
+        user.Password = cursor.getString(i++);
+        cursor.close();
+        db.close();
+
+        return user;
+    }
+
     public static User GetUserByID(Context context, int userid)
     {
         SQLiteDatabase db = getDB(context);
@@ -155,6 +178,32 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         db.close();
 
         return user;
+    }
+
+    public static long SaveUser(Context context, User user)
+    {
+        SQLiteDatabase db = getDB(context);
+        boolean exists = user.UserID > 0;
+
+        String table = "user";
+        ContentValues values = new ContentValues();
+        values.put("username", user.Username);
+        values.put("password", user.Password);
+        String where = "userid=?";
+        String[] args = {user.UserID+""};
+
+        if(exists)
+        {
+            db.update(table, values, where, args);
+            db.close();
+            return user.UserID;
+        }
+        else
+        {
+            long userid = db.insert(table, null, values);
+            db.close();
+            return userid;
+        }
     }
 
     public static Goal GetGoalByID(Context context, int userid)
@@ -181,6 +230,34 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         return goal;
     }
 
+    public static long SaveGoal(Context context, Goal goal)
+    {
+        SQLiteDatabase db = getDB(context);
+        boolean exists = goal.UserID > 0;
+
+        String table = "goal";
+        ContentValues values = new ContentValues();
+        values.put("startdate", goal.StartDate.toString());
+        values.put("startbalance", goal.StartBalance);
+        values.put("enddate", goal.EndDate.toString());
+        values.put("endbalance", goal.EndBalance);
+        String where = "userid=?";
+        String[] args = {goal.UserID+""};
+
+        if(exists)
+        {
+            db.update(table, values, where, args);
+            db.close();
+            return goal.UserID;
+        }
+        else
+        {
+            long userid = db.insert(table, null, values);
+            db.close();
+            return userid;
+        }
+    }
+
     public static Transaction GetTransactionByID(Context context, int transactionID)
     {
         SQLiteDatabase db = getDB(context);
@@ -203,5 +280,33 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         db.close();
 
         return transaction;
+    }
+
+    public static long SaveTransaction(Context context, Transaction trans)
+    {
+        SQLiteDatabase db = getDB(context);
+        boolean exists = trans.TransactionID > 0;
+
+        String table = "[transaction]";
+        ContentValues values = new ContentValues();
+        values.put("userid", trans.UserID);
+        values.put("transactionname", trans.UserID);
+        values.put("transactionamount", trans.UserID);
+        values.put("transactiondate", trans.UserID);
+        String where = "transactionid=?";
+        String[] args = {trans.TransactionID+""};
+
+        if(exists)
+        {
+            db.update(table, values, where, args);
+            db.close();
+            return trans.TransactionID;
+        }
+        else
+        {
+            long transid = db.insert(table, null, values);
+            db.close();
+            return transid;
+        }
     }
 }
