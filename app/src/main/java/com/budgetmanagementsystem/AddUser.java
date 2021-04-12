@@ -34,7 +34,7 @@ public class AddUser extends AppCompatActivity {
                 String passwordString = password.getText().toString();
                 user.Password = passwordString;
 
-                DataBaseUtils.SaveUser(this, user);
+                DataBaseUtils.SaveUser(v.getContext(), user);
 
 
                 Intent intent = new Intent(AddUser.this, MainActivity.class);

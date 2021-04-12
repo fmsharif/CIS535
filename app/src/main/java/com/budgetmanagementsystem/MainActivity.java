@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean exists = false;
 
-                if (DataBaseUtils.GetUserByLogin(this, usernameString, passwordString)){
+                if (DataBaseUtils.UserExists(v.getContext(), usernameString, passwordString)){
                     exists = true;
 
-                    User x = DataBaseUtils.GetUserByLogin(this,usernameString, passwordString);
+                    User x = DataBaseUtils.GetUserByLogin(v.getContext(),usernameString, passwordString);
 
                     //MENU ACTIVITY
                     Intent intent = new Intent(MainActivity.this, Menu.class);
