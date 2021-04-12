@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,12 +35,29 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //MENU ACTIVITY
-                Intent intent = new Intent(MainActivity.this, Menu.class);
-                startActivity(intent);
 
-                //IF WRONG PASSWORD - WRONG PASSWORD MESSAGE
-                //Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+                EditText username = (EditText) findViewById(R.id.editTextTextPersonName);
+                String usernameString = username.getText().toString();
+
+                EditText password = (EditText) findViewById(R.id.editTextTextPassword);
+                String passwordString = password.getText().toString();
+
+                boolean exists = false;
+
+                if (DataBaseUtils.GetUserByLogin(this, usernameString, passwordString)){
+                    exists = true;
+
+                    User x = DataBaseUtils.GetUserByLogin(this,usernameString, passwordString);
+
+                    //MENU ACTIVITY
+                    Intent intent = new Intent(MainActivity.this, Menu.class);
+                    startActivity(intent);
+                };
+                if (exists == false){
+                    //IF WRONG PASSWORD - WRONG PASSWORD MESSAGE
+                    Toast.makeText(getApplicationContext(), "Incorrect Password or Username", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         });
