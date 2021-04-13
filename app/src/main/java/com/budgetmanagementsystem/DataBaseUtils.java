@@ -136,6 +136,11 @@ public class DataBaseUtils extends SQLiteOpenHelper {
     }
     //endregion
 
+    public static boolean UserExists(Context context, String username, String password)
+    {
+        return GetUserByLogin(context, username, password) != null;
+    }
+
     public static User GetUserByLogin(Context context, String username, String password)
     {
         SQLiteDatabase db = getDB(context);
@@ -146,12 +151,16 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         String[] selArgs = {username, password};
 
         Cursor cursor = db.query(table, cols, select, selArgs, null, null, null);
-        cursor.moveToFirst();
-        User user = new User();
-        int i = 0;
-        user.UserID = cursor.getInt(i++);
-        user.Username = cursor.getString(i++);
-        user.Password = cursor.getString(i++);
+        User user = null;
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            user = new User();
+            int i = 0;
+            user.UserID = cursor.getInt(i++);
+            user.Username = cursor.getString(i++);
+            user.Password = cursor.getString(i++);
+        }
         cursor.close();
         db.close();
 

@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         goal = DataBaseUtils.GetGoalByID(this, 1);
         trans = DataBaseUtils.GetTransactionByID(this, 1);
 
-       // txt1.setText(user.Username);
+        System.out.println("User exists so should be true: " + DataBaseUtils.UserExists(this, "Jacob", "abc123"));
+        System.out.println("User does not exist so should be false: " + DataBaseUtils.UserExists(this, "Nobody", "NotAUser"));
 
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
