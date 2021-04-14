@@ -145,6 +145,9 @@ public class DataBaseUtils extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getDB(context);
 
+        // Hash the password before using DB
+        password = Hash.hashPassword(password).get();
+
         String table = "user";
         String[] cols = {"userid", "username", "password"};
         String select = "username=? AND password=?";
@@ -193,6 +196,9 @@ public class DataBaseUtils extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getDB(context);
         boolean exists = user.UserID > 0;
+
+        // Hash the password before using DB
+        user.Password = Hash.hashPassword(user.Password).get();
 
         String table = "user";
         ContentValues values = new ContentValues();
