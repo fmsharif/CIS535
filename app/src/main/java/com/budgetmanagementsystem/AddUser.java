@@ -24,7 +24,7 @@ public class AddUser extends AppCompatActivity {
                 //USERNAME ALREADY EXISTS MESSAGE
                 //Toast.makeText(getApplicationContext(), "Username Already Exists", Toast.LENGTH_SHORT).show();
 
-                // ADD USERNAME AND PASSWORD TO DB
+                // SAVE USER
                 User user = new User();
                 EditText username = (EditText) findViewById(R.id.editTextTextPersonName2);
                 String usernameString = username.getText().toString();
@@ -34,9 +34,12 @@ public class AddUser extends AppCompatActivity {
                 String passwordString = password.getText().toString();
                 user.Password = passwordString;
 
+                //user.Username = "Brooke";
+                //user.Password = "abc123";
+
                 DataBaseUtils.SaveUser(v.getContext(), user);
 
-
+                //GO TO MAIN LOGIN SCREEN
                 Intent intent = new Intent(AddUser.this, MainActivity.class);
                 startActivity(intent);
             }

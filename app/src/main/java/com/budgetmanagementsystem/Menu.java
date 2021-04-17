@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,7 @@ public class Menu extends AppCompatActivity {
         addTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ADD TRANSACTION ACTIVITY
+                //GO TO ADD TRANSACTION ACTIVITY
                 Intent intent = new Intent(Menu.this, AddTransaction.class);
                 startActivity(intent);
             }
@@ -27,7 +28,7 @@ public class Menu extends AppCompatActivity {
         addGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ADD GOAL ACTIVITY
+                //GO TO ADD GOAL ACTIVITY
                 Intent intent = new Intent(Menu.this, AddGoal.class);
                 startActivity(intent);
             }
@@ -37,7 +38,7 @@ public class Menu extends AppCompatActivity {
         viewHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ADD TRANSACTION ACTIVITY
+                //GO TO ADD TRANSACTION ACTIVITY
                 Intent intent = new Intent(Menu.this, ViewHistory.class);
                 startActivity(intent);
             }
