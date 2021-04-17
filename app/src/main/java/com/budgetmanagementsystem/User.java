@@ -1,7 +1,7 @@
 package com.budgetmanagementsystem;
 
 public class User {
-    protected int UserID;
+    protected long UserID;
     protected String Username;
     protected String Password;
 

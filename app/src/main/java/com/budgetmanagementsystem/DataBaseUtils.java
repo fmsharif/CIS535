@@ -170,7 +170,7 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         return user;
     }
 
-    public static User GetUserByID(Context context, int userid)
+    public static User GetUserByID(Context context, long userid)
     {
         SQLiteDatabase db = getDB(context);
 
@@ -221,7 +221,7 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         }
     }
 
-    public static Goal GetGoalByID(Context context, int userid)
+    public static Goal GetGoalByID(Context context, long userid)
     {
         SQLiteDatabase db = getDB(context);
 
@@ -273,7 +273,7 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         }
     }
 
-    public static Transaction GetTransactionByID(Context context, int transactionID)
+    public static Transaction GetTransactionByID(Context context, long transactionID)
     {
         SQLiteDatabase db = getDB(context);
 
@@ -297,6 +297,40 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         return transaction;
     }
 
+    public static Transaction[] GetTransactionsByUser(Context context, long userID)
+    {
+        SQLiteDatabase db = getDB(context);
+
+        String table = "[transaction]";
+        String[] cols = {"transactionid", "userid", "transactionname", "transactionamount", "transactiondate"};
+        String select = "userid=?";
+        String[] selArgs = {userID+""};
+        String orderBy = "transactiondate";
+
+        Cursor cursor = db.query(table, cols, select, selArgs, null, null, orderBy);
+        cursor.moveToFirst();
+
+        Transaction[] transactions = new Transaction[cursor.getCount()];
+
+        do
+        {
+            Transaction transaction = new Transaction();
+            int i = 0;
+            transaction.TransactionID = cursor.getInt(i++);
+            transaction.UserID = cursor.getInt(i++);
+            transaction.TransactionName = cursor.getString(i++);
+            transaction.TransactionAmount = cursor.getDouble(i++);
+            transaction.TransactionDate = Date.valueOf(cursor.getString(i++));
+
+            transactions[cursor.getPosition()] = transaction;
+        } while(cursor.moveToNext());
+
+        cursor.close();
+        db.close();
+
+        return transactions;
+    }
+
     public static long SaveTransaction(Context context, Transaction trans)
     {
         SQLiteDatabase db = getDB(context);
@@ -305,9 +339,9 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         String table = "[transaction]";
         ContentValues values = new ContentValues();
         values.put("userid", trans.UserID);
-        values.put("transactionname", trans.UserID);
-        values.put("transactionamount", trans.UserID);
-        values.put("transactiondate", trans.UserID);
+        values.put("transactionname", trans.TransactionName);
+        values.put("transactionamount", trans.TransactionAmount);
+        values.put("transactiondate", trans.TransactionDate.toString());
         String where = "transactionid=?";
         String[] args = {trans.TransactionID+""};
 
@@ -323,5 +357,18 @@ public class DataBaseUtils extends SQLiteOpenHelper {
             db.close();
             return transid;
         }
+    }
+
+    public static void DeleteTransaction(Context context, Transaction trans)
+    {
+        SQLiteDatabase db = getDB(context);
+
+        String table = "[transaction]";
+        String where = "transactionid=?";
+        String[] args = {trans.TransactionID+""};
+
+        db.delete(table, where, args);
+
+        db.close();
     }
 }

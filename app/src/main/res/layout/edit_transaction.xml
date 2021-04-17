@@ -61,29 +61,41 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:onClick="submitTransaction"
-        android:id="@+id/transactionSubmit"
+        android:id="@+id/transactionUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
-        android:text="Submit"
+        android:onClick="updateTransaction"
+        android:text="Update"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintHorizontal_bias="0.221"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:onClick="cancel"
-        android:id="@+id/transactionCancel"
+        android:id="@+id/transactionDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
+        android:onClick="deleteTransaction"
+        android:text="Delete"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/transactionCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:onClick="cancel"
         android:text="Cancel"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.783"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

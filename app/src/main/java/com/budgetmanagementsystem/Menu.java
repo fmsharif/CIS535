@@ -14,12 +14,15 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        long userID = getIntent().getLongExtra("userID", 0);
+
         Button addTransaction = findViewById(R.id.enterTransactionButton);
         addTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //GO TO ADD TRANSACTION ACTIVITY
                 Intent intent = new Intent(Menu.this, AddTransaction.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });
@@ -30,6 +33,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 //GO TO ADD GOAL ACTIVITY
                 Intent intent = new Intent(Menu.this, AddGoal.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });
@@ -40,6 +44,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 //GO TO ADD TRANSACTION ACTIVITY
                 Intent intent = new Intent(Menu.this, ViewHistory.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DatabaseUtils;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (DataBaseUtils.UserExists(v.getContext(), usernameString, passwordString)){
 
+                    // Get user object
+                    User user = DataBaseUtils.GetUserByLogin(v.getContext(), usernameString, passwordString);
+
                     //GO To MENU ACTIVITY IF USERNAME AND PASSWORD EXISTS
                     Intent intent = new Intent(MainActivity.this, Menu.class);
+                    intent.putExtra("userID", user.UserID);
                     startActivity(intent);
                 };
                 if (DataBaseUtils.UserExists(v.getContext(), usernameString, passwordString) == false){

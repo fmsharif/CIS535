@@ -1,41 +1,49 @@
 package com.budgetmanagementsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import java.sql.Date;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddTransaction extends AppCompatActivity {
+import java.sql.Date;
+
+public class EditTransaction extends AppCompatActivity {
 
     EditText etDesc, etDate, etAmnt;
-    long userID;
+    Transaction trans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_transaction);
+        setContentView(R.layout.edit_transaction);
 
         etDesc = findViewById(R.id.description);
         etDate = findViewById(R.id.date);
         etAmnt = findViewById(R.id.amount);
 
-        userID = getIntent().getLongExtra("userID", 0);
+        long transID = getIntent().getLongExtra("transactionID", 0);
+        System.out.println(transID);
+        trans = DataBaseUtils.GetTransactionByID(this, transID);
+
+        etDesc.setText(trans.TransactionName);
+        etDate.setText(trans.TransactionDate.toString());
+        etAmnt.setText(trans.TransactionAmount + "");
     }
 
-    public void submitTransaction(View view)
+    public void updateTransaction(View view)
     {
-        Transaction trans = new Transaction();
-
-        trans.UserID = userID;
         trans.TransactionName = etDesc.getText().toString();
         trans.TransactionDate = Date.valueOf(etDate.getText().toString());
         trans.TransactionAmount = Double.parseDouble(etAmnt.getText().toString());
 
         DataBaseUtils.SaveTransaction(view.getContext(), trans);
+        finish();
+    }
+
+    public void deleteTransaction(View view)
+    {
+        DataBaseUtils.DeleteTransaction(view.getContext(), trans);
         finish();
     }
 

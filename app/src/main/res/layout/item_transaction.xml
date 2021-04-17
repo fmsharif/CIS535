@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="0dp"
+        android:layout_weight=".25"
+        android:layout_height="wrap_content"
+        android:text="TransactionDate" />
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_weight=".5"
+        android:layout_height="wrap_content"
+        android:text="TransactionName" />
+    <TextView
+        android:id="@+id/tvAmnt"
+        android:layout_width="0dp"
+        android:layout_weight=".25"
+        android:layout_height="wrap_content"
+        android:text="TransactionAmount" />
+</LinearLayout>
