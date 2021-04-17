@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class TransactionAdapter extends ArrayAdapter<Transaction> {
@@ -31,11 +32,9 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
             TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
             TextView tvAmnt = (TextView) convertView.findViewById(R.id.tvAmnt);
             // Populate the data into the template view using the data object
-            System.out.println(position);
-            System.out.println(transaction != null);
             tvName.setText(transaction.TransactionName);
             tvDate.setText(transaction.TransactionDate.toString());
-            tvAmnt.setText(transaction.TransactionAmount + "");
+            tvAmnt.setText(NumberFormat.getCurrencyInstance().format(transaction.TransactionAmount));
             
         }
 
