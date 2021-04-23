@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class EditTransaction extends AppCompatActivity {
     EditText etDesc, etDate;
     CurrencyEditText etAmnt;
     Transaction trans;
+    Switch sIsIncome;
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -31,13 +33,15 @@ public class EditTransaction extends AppCompatActivity {
         etDesc = findViewById(R.id.description);
         etDate = findViewById(R.id.date);
         etAmnt = findViewById(R.id.amount);
+        sIsIncome = findViewById(R.id.switchIsIncome2);
 
         long transID = getIntent().getLongExtra("transactionID", 0);
         trans = DataBaseUtils.GetTransactionByID(this, transID);
 
         etDesc.setText(trans.TransactionName);
         etDate.setText(trans.TransactionDate.toString());
-        etAmnt.setText(trans.TransactionAmount + "");
+        etAmnt.setText(Math.abs(trans.TransactionAmount) + "");
+        sIsIncome.setChecked(trans.TransactionAmount > 0);
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -65,9 +69,11 @@ public class EditTransaction extends AppCompatActivity {
 
     public void updateTransaction(View view)
     {
+        int negativeModifier = sIsIncome.isChecked() ? 1 : -1;
+
         trans.TransactionName = etDesc.getText().toString();
         trans.TransactionDate = Date.valueOf(etDate.getText().toString());
-        trans.TransactionAmount = etAmnt.getNumericValue();
+        trans.TransactionAmount = negativeModifier * etAmnt.getNumericValue();
 
         DataBaseUtils.SaveTransaction(view.getContext(), trans);
         finish();

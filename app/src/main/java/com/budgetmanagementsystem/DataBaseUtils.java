@@ -234,11 +234,18 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Goal goal = new Goal();
         int i = 0;
-        goal.UserID = cursor.getInt(i++);
-        goal.StartDate = Date.valueOf(cursor.getString(i++));
-        goal.StartBalance = cursor.getDouble(i++);
-        goal.EndDate = Date.valueOf(cursor.getString(i++));
-        goal.EndBalance = cursor.getDouble(i++);
+        if(cursor.getCount() < 0)
+        {
+            goal.UserID = cursor.getInt(i++);
+            goal.StartDate = Date.valueOf(cursor.getString(i++));
+            goal.StartBalance = cursor.getDouble(i++);
+            goal.EndDate = Date.valueOf(cursor.getString(i++));
+            goal.EndBalance = cursor.getDouble(i++);
+        }
+        else
+        {
+            return null;
+        }
         cursor.close();
         db.close();
 
@@ -311,6 +318,9 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         Transaction[] transactions = new Transaction[cursor.getCount()];
+
+        if(cursor.getCount() == 0)
+            return transactions;
 
         do
         {

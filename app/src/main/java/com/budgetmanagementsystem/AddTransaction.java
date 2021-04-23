@@ -1,11 +1,11 @@
 package com.budgetmanagementsystem;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -20,6 +20,8 @@ public class AddTransaction extends AppCompatActivity {
 
     EditText etDesc, etDate;
     CurrencyEditText etAmnt;
+    Switch sIsIncome;
+
     long userID;
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -31,6 +33,7 @@ public class AddTransaction extends AppCompatActivity {
         etDesc = findViewById(R.id.description);
         etDate = findViewById(R.id.date);
         etAmnt = findViewById(R.id.amount);
+        sIsIncome = findViewById(R.id.switchIsIncome);
 
         userID = getIntent().getLongExtra("userID", 0);
 
@@ -62,10 +65,12 @@ public class AddTransaction extends AppCompatActivity {
     {
         Transaction trans = new Transaction();
 
+        int negativeModifier = sIsIncome.isChecked() ? 1 : -1;
+
         trans.UserID = userID;
         trans.TransactionName = etDesc.getText().toString();
         trans.TransactionDate = Date.valueOf(etDate.getText().toString());
-        trans.TransactionAmount = etAmnt.getNumericValue();
+        trans.TransactionAmount = negativeModifier * etAmnt.getNumericValue();
 
         DataBaseUtils.SaveTransaction(view.getContext(), trans);
         finish();
