@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    com.cottacush.android.currencyedittext.CurrencyEditText
+    <com.cottacush.android.currencyedittext.CurrencyEditText
         android:id="@+id/goalAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="472dp"
+        android:clickable="false"
+        android:cursorVisible="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="End Date"
         android:inputType="date"
         android:textSize="18sp"
@@ -58,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.944"
         app:layout_constraintStart_toStartOf="parent" />
 
-    com.cottacush.android.currencyedittext.CurrencyEditText
+    <com.cottacush.android.currencyedittext.CurrencyEditText
         android:id="@+id/editTextNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +82,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="472dp"
+        android:clickable="false"
+        android:cursorVisible="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="Start Date"
         android:inputType="date"
         android:textSize="18sp"
@@ -86,24 +94,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextNumber2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Start Amount"
-        android:inputType="number"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="329dp" />
-
-    <EditText
-        android:id="@+id/editTextNumber3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="End Amount"
-        android:inputType="number"
-        tools:layout_editor_absoluteX="268dp"
-        tools:layout_editor_absoluteY="329dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -234,7 +234,7 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Goal goal = new Goal();
         int i = 0;
-        if(cursor.getCount() < 0)
+        if(cursor.getCount() > 0)
         {
             goal.UserID = cursor.getInt(i++);
             goal.StartDate = Date.valueOf(cursor.getString(i++));
@@ -255,9 +255,9 @@ public class DataBaseUtils extends SQLiteOpenHelper {
     public static long SaveGoal(Context context, Goal goal)
     {
         SQLiteDatabase db = getDB(context);
-        boolean exists = goal.UserID > 0;
 
         String table = "goal";
+        String columns[] = {"userid"};
         ContentValues values = new ContentValues();
         values.put("startdate", goal.StartDate.toString());
         values.put("startbalance", goal.StartBalance);
@@ -265,6 +265,10 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         values.put("endbalance", goal.EndBalance);
         String where = "userid=?";
         String[] args = {goal.UserID+""};
+
+        Cursor cursor = db.query(table, columns, where, args, null, null, null, null);
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
 
         if(exists)
         {
