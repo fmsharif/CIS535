@@ -44,8 +44,8 @@ public class AddGoal extends AppCompatActivity {
 
         etGoalStartDate = findViewById(R.id.editTextDate2);
         etGoalEndDate = findViewById(R.id.editTextDate);
-        etGoalStartAmnt = findViewById(R.id.goalAmount);
-        etGoalEndAmnt = findViewById(R.id.editTextNumber);
+        etGoalStartAmnt = findViewById(R.id.editTextNumber);
+        etGoalEndAmnt = findViewById(R.id.goalAmount);
         btnSubmit = findViewById(R.id.goalButton);
 
         Goal goal = DataBaseUtils.GetGoalByID(this, userID);

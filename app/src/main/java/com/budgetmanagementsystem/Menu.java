@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,6 +104,15 @@ public class Menu extends AppCompatActivity {
         }
 
         Date currentDate = new Date();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            currentDate = sdf.parse(sdf.format(new Date()));
+        }
+        catch(Exception ex)
+        {
+            // Do nothing
+        }
+
         double currentBalance = GetCurrentBalance(goal);
 
         long timeElapsed = currentDate.getTime() - goal.StartDate.getTime();
